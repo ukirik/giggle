@@ -51,6 +51,27 @@ Takes in one, or more, tab-separated text file(s) as input (by default from IgDi
                             Threshold value for D-coverage
       -s STRANSLATOR, --stranslator STRANSLATOR
                             reference file to translate s-codes
+### vdist.py
+
+Takes in one or more IMGT/High-VQUEST output files (specifically the IMGT-gapped-nt-sequences file), looks for a particular position (or a range) in sequences associated with a particular gene, and outputs stacked bar charts visualizing relative distribution of the different nucleotides.
+
+    usage: vdist.py [-h] (-c CONFIG | -f FILES [FILES ...]) -g GENE -p POS
+                    [POS ...] [-o OUT] [--nofilter]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            define a YAML config file for multiple runs
+      -f FILES [FILES ...], --files FILES [FILES ...]
+                            output of IMGT/High-VQUEST runs
+      -g GENE, --gene GENE  IGHV gene to be analyzed
+      -p POS [POS ...], --pos POS [POS ...]
+                            the particular position, or range of positions, where
+                            the SNV occurs
+      -o OUT, --out OUT     name of the output file
+      --nofilter            Flag to indicate whether to filter out unproductive
+                            sequences (default: False)
+
 
 ### plotgene.py
 
