@@ -1,6 +1,7 @@
 from Bio import SeqIO
 from collections import defaultdict
 import matplotlib
+matplotlib.use('Agg')   # In order to bypass X-server connection altogether (useful over ssh)
 import matplotlib.pyplot as plt
 import pandas as pd
 import sys, csv, argparse, re, math
@@ -74,7 +75,7 @@ def processIMGT():
             if args.gene + "*" not in row[VGENE]:
                 continue
 
-            if args.threshold < float(row[VIDEN]):
+            if args.threshold > float(row[VIDEN]):
                 continue
 
             if args.motif is not None:
@@ -84,6 +85,7 @@ def processIMGT():
             seq_id = regex.sub("", row[SEQID])
             seqids.add(seq_id)
 
+            # print("{}: {} {} {}".format(row[0], seq_id, row[VGENE], row[VIDEN]))
         return seqids
 
 
@@ -124,6 +126,9 @@ def main():
         sys.exit(0)
     else:
         print("{0} sequence IDs extracted".format(len(ids)))
+
+    # DEBUG checkpoint
+    # input("Enter to continue")
 
     records = SeqIO.parse(args.fastq, "fastq")
     filterd = [rec for rec in records if rec.id.split('|')[0] in ids]
